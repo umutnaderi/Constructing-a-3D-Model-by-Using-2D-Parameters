@@ -1,0 +1,351 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "spine.h"
+#include <QFileDialog>
+#include <QTextStream>
+#include <iostream>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <QMouseEvent>
+#include <QKeyEvent>
+#include <QMessageBox>
+#include <string>
+
+using namespace std;
+using namespace cv;
+static bool isChanged = true;
+int isFront = 0;
+int maxPointCount = 20;
+int pointCount = 0;
+int maxVertebraCount = 5;
+int vertebraCount = 0;
+int edgeCount=0;
+int maxEdgeCount = 4;
+int vertexCount = 0;
+Mat lateralArray[20];
+Mat frontalArray[20];
+
+
+int maxVertexCount = 20;
+Spine *spine;
+QPoint point;
+
+String defaultPath;
+String path = "C:/snapshot";
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    spine = new Spine();
+
+    lateralArray[0]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-1.png",1);
+    lateralArray[1]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-2.png",1);
+    lateralArray[2]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-3.png",1);
+    lateralArray[3]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-4.png",1);
+    lateralArray[4]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-1.png",1);
+    lateralArray[5]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-2.png",1);
+    lateralArray[6]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-3.png",1);
+    lateralArray[7]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-4.png",1);
+    lateralArray[8]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-1.png",1);
+    lateralArray[9]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-2.png",1);
+    lateralArray[10]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-3.png",1);
+    lateralArray[11]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-4.png",1);
+    lateralArray[12]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-1.png",1);
+    lateralArray[13]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-2.png",1);
+    lateralArray[14]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-3.png",1);
+    lateralArray[15]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-4.png",1);
+    lateralArray[16]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-1.png",1);
+    lateralArray[17]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-2.png",1);
+    lateralArray[18]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-3.png",1);
+    lateralArray[19]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-4.png",1);
+
+    frontalArray[0]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-1.png",1);
+    frontalArray[1]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-2.png",1);
+    frontalArray[2]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-3.png",1);
+    frontalArray[3]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-4.png",1);
+    frontalArray[4]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-1.png",1);
+    frontalArray[5]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-2.png",1);
+    frontalArray[6]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-3.png",1);
+    frontalArray[7]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-4.png",1);
+    frontalArray[8]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-1.png",1);
+    frontalArray[9]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-2.png",1);
+    frontalArray[10]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-3.png",1);
+    frontalArray[11]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-4.png",1);
+    frontalArray[12]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-1.png",1);
+    frontalArray[13]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-2.png",1);
+    frontalArray[14]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-3.png",1);
+    frontalArray[15]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-4.png",1);
+    frontalArray[16]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-1.png",1);
+    frontalArray[17]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-2.png",1);
+    frontalArray[18]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-3.png",1);
+    frontalArray[19]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-4.png",1);
+
+    ui->setupUi(this);
+    connect(ui->mainLabel, SIGNAL(sendMousePosition(QPoint&)), this, SLOT(showMousePosition(QPoint&)));
+    connect(ui->mainLabel, SIGNAL(sendClickPosition(QPoint&)), this, SLOT(updateImagePoint(QPoint&)));
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_actLateral_triggered()
+{
+    cout << "entered Lateral" << endl;
+    isFront = 0;
+    vertexCount = 0;
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "C:/Users/nader/Documents/Final_Project/Test Phases",
+                                                    tr("Images (*.png *.xpm *.jpg)"));
+
+    QByteArray ba = fileName.toLatin1();
+    defaultPath = ba.data();
+    displayImage = imread(defaultPath);
+    defaultImage = imread(defaultPath);
+    updateImage();
+    QPixmap pixPrev("C:/Users/nader/Documents/deneme/Lateral/0.png");
+    ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) lateralArray[vertexCount].data, lateralArray[vertexCount].cols, lateralArray[vertexCount].rows, QImage::Format_RGB888)));
+    ui->sideLabel->setScaledContents(true);
+    ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    ui->viewLabel->setText("Lateral View");
+
+}
+
+void MainWindow::on_actlFront_triggered()
+{
+    isFront = 1;
+    vertexCount = 0;
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "C:/Users/nader/Documents/Final_Project/Test Phases",
+                                                    tr("Images (*.png *.xpm *.jpg)"));
+    QByteArray ba = fileName.toLatin1();
+    defaultPath = ba.data();
+    displayImage = imread(defaultPath);
+    defaultImage = imread(defaultPath);;
+    updateImage();
+    QPixmap pixPrev("C:/Users/nader/Documents/deneme/Front/0.png");
+    ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frontalArray[vertexCount].data, frontalArray[vertexCount].cols, frontalArray[vertexCount].rows, QImage::Format_RGB888)));
+    ui->sideLabel->setScaledContents(true);
+    ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    ui->viewLabel->setText("Frontal View");
+}
+
+void MainWindow::showMousePosition(QPoint &pos)
+{
+    ui->positionLabel->setText("x: "+ QString::number(pos.x()) + "  y: " + QString::number(pos.y()));
+    //ui->selectLabel->setText("Vertebra: "+QString::number(vertebraCount) + " Vertex: "+ QString::number(vertexCount));
+}
+
+void MainWindow::updateImagePoint(QPoint &pos)
+{
+    cout << "isfront= " << isFront << endl;
+    if(isFront==1){
+        displayImage = imread(defaultPath);
+        cv::circle( displayImage, Point(pos.x(), pos.y()), 3, Scalar(255,0,0), 4);
+        point = pos;
+        spine->Vector_Vertebrae.at(vertexCount/4).Vector_Vertex_Frontal.at(vertexCount%4).setx(pos.x());
+        spine->Vector_Vertebrae.at(vertexCount/4).Vector_Vertex_Frontal.at(vertexCount%4).setz(550 - pos.y());
+        cv::circle( displayImage, Point(pos.x(), pos.y()), 2, Scalar(255,255,0), 2);
+        updateImage();
+    }
+    if(isFront==0){
+        displayImage = imread(defaultPath);
+        cv::circle( displayImage, Point(pos.x(), pos.y()), 3, Scalar(255,0,0), 4);
+        point = pos;
+        spine->Vector_Vertebrae.at(vertexCount/4).Vector_Vertex_Lateral.at(vertexCount%4).sety(pos.x());
+        spine->Vector_Vertebrae.at(vertexCount/4).Vector_Vertex_Lateral.at(vertexCount%4).setz(pos.y());
+        cv::circle( displayImage, Point(pos.x(), pos.y()), 2, Scalar(255,255,0), 2);
+        updateImage();
+    }
+
+
+}
+
+void MainWindow::updateImage()
+{
+
+    QImage qimgOriginal1((uchar*) displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_RGB888);
+    ui->mainLabel->setPixmap(QPixmap::fromImage(qimgOriginal1));
+    if(isFront){
+        ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frontalArray[vertexCount].data, frontalArray[vertexCount].cols, frontalArray[vertexCount].rows, QImage::Format_RGB888)));
+        ui->sideLabel->setScaledContents(true);
+        ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        ui->selectLabel->setText("Vertebra: "+ QString::number((vertexCount/4)+1) + "  Vertex: " + QString::number((vertexCount%4)+1));
+    }
+    if(!isFront){
+        ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) lateralArray[vertexCount].data, lateralArray[vertexCount].cols, lateralArray[vertexCount].rows, QImage::Format_RGB888)));
+        ui->sideLabel->setScaledContents(true);
+        ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        ui->selectLabel->setText("Vertebra: "+ QString::number((vertexCount/4)+1) + "  Vertex: " + QString::number((vertexCount%4)+1));
+    }
+}
+
+
+void MainWindow::on_btnBack_clicked()
+{
+    if(vertexCount > 0){
+        vertexCount--;
+        if(!pointSequence.empty())
+         pointSequence.pop_back();
+        //isChanged = true;
+        updateImage();
+    }
+}
+
+void MainWindow::on_btnNext_clicked()
+{
+    if(vertexCount<maxVertexCount){
+        vertexCount++;
+        //isChanged = true;
+        updateImage();
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    if (event->key() == Qt::Key_A){
+        if(vertexCount > 0){
+            vertexCount--;
+            if(!pointSequence.empty())
+             pointSequence.pop_back();
+            //isChanged = true;
+            updateImage();
+        }
+    }
+    else if (event->key() == Qt::Key_D){
+        if(vertexCount<maxVertexCount){
+            vertexCount++;
+            //isChanged = true;
+            updateImage();
+        }
+    }
+    else if (event->key() == Qt::Key_S){
+        QMessageBox msgBox;
+        msgBox.setText("Output file has been created.");
+        msgBox.exec();
+        createOutput();
+    }
+}
+
+void MainWindow::createOutput()
+{
+
+    QString filename = "C:/Users/nader/Documents/Final_Project/final.py";
+    QFile file(filename);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
+
+        QTextStream stream(&file);
+
+        stream << endl;
+            stream << "scale01.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(0).getCenXTop() << "," << spine->Vector_Vertebrae.at(0).getCenYTop() << "," << spine->Vector_Vertebrae.at(0).getCenZTop() << ")" << endl;
+            stream << "scale01.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(0).getFrontalRotationTop() << ")" << endl;
+            stream << "scale01.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(0).getLateralRotationTop() << ")" << endl;
+            stream << "scale01.Scale = (" << spine->Vector_Vertebrae.at(0).getLengthTop() / 9 << "," << spine->Vector_Vertebrae.at(0).getWidthTop() / 7 << "," << spine->Vector_Vertebrae.at(0).getHeight() / 7  << ")" << endl;
+
+            stream << "scale02.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(0).getCenXBottom() << "," << spine->Vector_Vertebrae.at(0).getCenYBottom() << "," << spine->Vector_Vertebrae.at(0).getCenZBottom() << ")" << endl;
+            stream << "scale02.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(0).getFrontalRotationBottom() << ")" << endl;
+            stream << "scale02.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(0).getLateralRotationBottom() << ")" << endl;
+            stream << "scale02.Scale = (" << spine->Vector_Vertebrae.at(0).getLengthBottom() / 9 << "," << spine->Vector_Vertebrae.at(0).getWidthBottom() / 7 << "," << spine->Vector_Vertebrae.at(0).getHeight() / 7  << ")" << endl;
+
+            stream << "scale11.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(1).getCenXTop() << "," << spine->Vector_Vertebrae.at(1).getCenYTop() << "," << spine->Vector_Vertebrae.at(1).getCenZTop() << ")" << endl;
+            stream << "scale11.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(1).getFrontalRotationTop() << ")" << endl;
+            stream << "scale11.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(1).getLateralRotationTop() << ")" << endl;
+            stream << "scale11.Scale = (" << spine->Vector_Vertebrae.at(1).getLengthTop() / 9 << "," << spine->Vector_Vertebrae.at(1).getWidthTop() / 7 << "," << spine->Vector_Vertebrae.at(1).getHeight() / 7  << ")" << endl;
+
+            stream << "scale12.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(1).getCenXBottom() << "," << spine->Vector_Vertebrae.at(1).getCenYBottom() << "," << spine->Vector_Vertebrae.at(1).getCenZBottom() << ")" << endl;
+            stream << "scale12.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(1).getFrontalRotationBottom() << ")" << endl;
+            stream << "scale12.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(1).getLateralRotationBottom() << ")" << endl;
+            stream << "scale12.Scale = (" << spine->Vector_Vertebrae.at(1).getLengthBottom() / 9 << "," << spine->Vector_Vertebrae.at(1).getWidthBottom() / 7 << "," << spine->Vector_Vertebrae.at(1).getHeight() / 7  << ")" << endl;
+
+            stream << "scale21.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(2).getCenXTop() << "," << spine->Vector_Vertebrae.at(2).getCenYTop() << "," << spine->Vector_Vertebrae.at(2).getCenZTop() << ")" << endl;
+            stream << "scale21.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(2).getFrontalRotationTop() << ")" << endl;
+            stream << "scale21.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(2).getLateralRotationTop() << ")" << endl;
+            stream << "scale21.Scale = (" << spine->Vector_Vertebrae.at(2).getLengthTop() / 9 << "," << spine->Vector_Vertebrae.at(0).getWidthTop() / 7 << "," << spine->Vector_Vertebrae.at(2).getHeight() / 7  << ")" << endl;
+
+            stream << "scale22.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(2).getCenXBottom() << "," << spine->Vector_Vertebrae.at(2).getCenYBottom() << "," << spine->Vector_Vertebrae.at(2).getCenZBottom() << ")" << endl;
+            stream << "scale22.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(2).getFrontalRotationBottom() << ")" << endl;
+            stream << "scale22.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(2).getLateralRotationBottom() << ")" << endl;
+            stream << "scale22.Scale = (" << spine->Vector_Vertebrae.at(2).getLengthBottom() / 9 << "," << spine->Vector_Vertebrae.at(2).getWidthBottom() / 7 << "," << spine->Vector_Vertebrae.at(2).getHeight() / 7  << ")" << endl;
+
+            stream << "scale31.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(3).getCenXTop() << "," << spine->Vector_Vertebrae.at(3).getCenYTop() << "," << spine->Vector_Vertebrae.at(3).getCenZTop() << ")" << endl;
+            stream << "scale31.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(3).getFrontalRotationTop() << ")" << endl;
+            stream << "scale31.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(3).getLateralRotationTop() << ")" << endl;
+            stream << "scale31.Scale = (" << spine->Vector_Vertebrae.at(3).getLengthTop() / 9 << "," << spine->Vector_Vertebrae.at(3).getWidthTop() / 7 << "," << spine->Vector_Vertebrae.at(3).getHeight() / 7  << ")" << endl;
+
+            stream << "scale32.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(3).getCenXBottom() << "," << spine->Vector_Vertebrae.at(3).getCenYBottom() << "," << spine->Vector_Vertebrae.at(3).getCenZBottom() << ")" << endl;
+            stream << "scale32.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(3).getFrontalRotationBottom() << ")" << endl;
+            stream << "scale32.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(3).getLateralRotationBottom() << ")" << endl;
+            stream << "scale32.Scale = (" << spine->Vector_Vertebrae.at(3).getLengthBottom() / 9 << "," << spine->Vector_Vertebrae.at(3).getWidthBottom() / 7 << "," << spine->Vector_Vertebrae.at(3).getHeight() / 7  << ")" << endl;
+
+            stream << "scale41.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(4).getCenXTop() << "," << spine->Vector_Vertebrae.at(4).getCenYTop() << "," << spine->Vector_Vertebrae.at(4).getCenZTop() << ")" << endl;
+            stream << "scale41.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(4).getFrontalRotationTop() << ")" << endl;
+            stream << "scale41.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(4).getLateralRotationTop() << ")" << endl;
+            stream << "scale41.Scale = (" << spine->Vector_Vertebrae.at(4).getLengthTop() / 9 << "," << spine->Vector_Vertebrae.at(4).getWidthTop() / 7 << "," << spine->Vector_Vertebrae.at(4).getHeight() / 7  << ")" << endl;
+
+            stream << "scale42.Placement.Base = App.Vector(" <<  spine->Vector_Vertebrae.at(4).getCenXBottom() << "," << spine->Vector_Vertebrae.at(4).getCenYBottom() << "," << spine->Vector_Vertebrae.at(4).getCenZBottom() << ")" << endl;
+            stream << "scale42.Placement.Rotation = App.Rotation(App.Vector(0,1,0),"<< spine->Vector_Vertebrae.at(4).getFrontalRotationBottom() << ")" << endl;
+            stream << "scale42.Placement.Rotation = App.Rotation(App.Vector(1,0,0),"<< spine->Vector_Vertebrae.at(4).getLateralRotationBottom() << ")" << endl;
+            stream << "scale42.Scale = (" << spine->Vector_Vertebrae.at(4).getLengthBottom() / 9 << "," << spine->Vector_Vertebrae.at(4).getWidthBottom() / 7 << "," << spine->Vector_Vertebrae.at(4).getHeight() / 7 << ")" << endl;
+
+            stream << "FreeCAD.ActiveDocument.recompute()" << endl;
+            stream << "Gui.SendMsgToActiveView(\"ViewFit\")" << endl;
+            stream << "Gui.activeDocument().activeView().viewAxonometric()" << endl;
+
+            stream << "volume01 = loft01.Shape.Volume" << endl;
+            stream << "volume02 = loft11.Shape.Volume" << endl;
+            stream << "volume03 = loft21.Shape.Volume" << endl;
+            stream << "volume04 = loft31.Shape.Volume" << endl;
+            stream << "volume05 = loft41.Shape.Volume" << endl;
+
+
+            stream << "totalvolume = loft01.Shape.Volume + loft11.Shape.Volume + loft21.Shape.Volume + loft31.Shape.Volume + loft41.Shape.Volume" << endl;
+            stream << "volume01" << endl;
+            stream << "volume02" << endl;
+            stream << "volume03" << endl;
+            stream << "volume04" << endl;
+            stream << "volume05" << endl;
+
+            stream << "totalvolume" << endl;
+    }
+
+
+}
+
+void MainWindow::on_btnDone_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Output file has been created.");
+    msgBox.exec();
+    createOutput();
+}
+
+void MainWindow::on_btnReset_clicked()
+{
+    if(isFront){
+        vertexCount  = 0;
+        pointSequence.clear();
+        displayImage = imread(defaultPath);
+
+        updateImage();
+        QPixmap pixPrev("C:/Users/nader/Documents/deneme/Front/0.png");
+        ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frontalArray[vertexCount].data, frontalArray[vertexCount].cols, frontalArray[vertexCount].rows, QImage::Format_RGB888)));
+        ui->sideLabel->setScaledContents(true);
+        ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        ui->viewLabel->setText("Frontal View");
+    }
+    else{
+        vertexCount  = 0;
+        displayImage = imread(defaultPath);
+        defaultImage = displayImage.clone();
+        updateImage();
+        QPixmap pixPrev("C:/Users/nader/Documents/deneme/Lateral/0.png");
+        ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) lateralArray[vertexCount].data, lateralArray[vertexCount].cols, lateralArray[vertexCount].rows, QImage::Format_RGB888)));
+        ui->sideLabel->setScaledContents(true);
+        ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        ui->viewLabel->setText("Lateral View");
+    }
+}
