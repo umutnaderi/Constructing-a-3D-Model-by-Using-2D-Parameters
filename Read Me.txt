@@ -3,7 +3,7 @@ Files in the Repository:
 Constructing a 3D Model by Using 2D Parameters-Report.pdf		Project Thesis (Report)
 Constructing a 3D Model by Using 2D Parameters-Poster.pptx		Project Poster
 Constructing a 3D Model by Using 2D Parameters-Presentation.pptx	Project Presentation
-Final_Project\								Folder that contains the code, libraries and 3D Model Macros (Qt, Python)
+Spine\								Folder that contains the code, libraries and 3D Model Macros (Qt, Python)
 
 Software Requirements:
 
