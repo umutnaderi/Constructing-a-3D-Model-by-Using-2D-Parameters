@@ -40,47 +40,47 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     spine = new Spine();
 
-    lateralArray[0]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-1.png",1);
-    lateralArray[1]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-2.png",1);
-    lateralArray[2]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-3.png",1);
-    lateralArray[3]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/1-4.png",1);
-    lateralArray[4]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-1.png",1);
-    lateralArray[5]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-2.png",1);
-    lateralArray[6]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-3.png",1);
-    lateralArray[7]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/2-4.png",1);
-    lateralArray[8]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-1.png",1);
-    lateralArray[9]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-2.png",1);
-    lateralArray[10]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-3.png",1);
-    lateralArray[11]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/3-4.png",1);
-    lateralArray[12]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-1.png",1);
-    lateralArray[13]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-2.png",1);
-    lateralArray[14]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-3.png",1);
-    lateralArray[15]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/4-4.png",1);
-    lateralArray[16]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-1.png",1);
-    lateralArray[17]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-2.png",1);
-    lateralArray[18]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-3.png",1);
-    lateralArray[19]=imread("C:/Users/nader/Documents/Bitirme/Lateral Lumbar/5-4.png",1);
+    lateralArray[0]=imread("E:/Workspace/Spine/Lateral Lumbar/1-1.png",1);
+    lateralArray[1]=imread("E:/Workspace/Spine/Lateral Lumbar/1-2.png",1);
+    lateralArray[2]=imread("E:/Workspace/Spine/Lateral Lumbar/1-3.png",1);
+    lateralArray[3]=imread("E:/Workspace/Spine/Lateral Lumbar/1-4.png",1);
+    lateralArray[4]=imread("E:/Workspace/Spine/Lateral Lumbar/2-1.png",1);
+    lateralArray[5]=imread("E:/Workspace/Spine/Lateral Lumbar/2-2.png",1);
+    lateralArray[6]=imread("E:/Workspace/Spine/Lateral Lumbar/2-3.png",1);
+    lateralArray[7]=imread("E:/Workspace/Spine/Lateral Lumbar/2-4.png",1);
+    lateralArray[8]=imread("E:/Workspace/Spine/Lateral Lumbar/3-1.png",1);
+    lateralArray[9]=imread("E:/Workspace/Spine/Lateral Lumbar/3-2.png",1);
+    lateralArray[10]=imread("E:/Workspace/Spine/Lateral Lumbar/3-3.png",1);
+    lateralArray[11]=imread("E:/Workspace/Spine/Lateral Lumbar/3-4.png",1);
+    lateralArray[12]=imread("E:/Workspace/Spine/Lateral Lumbar/4-1.png",1);
+    lateralArray[13]=imread("E:/Workspace/Spine/Lateral Lumbar/4-2.png",1);
+    lateralArray[14]=imread("E:/Workspace/Spine/Lateral Lumbar/4-3.png",1);
+    lateralArray[15]=imread("E:/Workspace/Spine/Lateral Lumbar/4-4.png",1);
+    lateralArray[16]=imread("E:/Workspace/Spine/Lateral Lumbar/5-1.png",1);
+    lateralArray[17]=imread("E:/Workspace/Spine/Lateral Lumbar/5-2.png",1);
+    lateralArray[18]=imread("E:/Workspace/Spine/Lateral Lumbar/5-3.png",1);
+    lateralArray[19]=imread("E:/Workspace/Spine/Lateral Lumbar/5-4.png",1);
 
-    frontalArray[0]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-1.png",1);
-    frontalArray[1]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-2.png",1);
-    frontalArray[2]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-3.png",1);
-    frontalArray[3]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/1-4.png",1);
-    frontalArray[4]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-1.png",1);
-    frontalArray[5]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-2.png",1);
-    frontalArray[6]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-3.png",1);
-    frontalArray[7]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/2-4.png",1);
-    frontalArray[8]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-1.png",1);
-    frontalArray[9]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-2.png",1);
-    frontalArray[10]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-3.png",1);
-    frontalArray[11]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/3-4.png",1);
-    frontalArray[12]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-1.png",1);
-    frontalArray[13]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-2.png",1);
-    frontalArray[14]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-3.png",1);
-    frontalArray[15]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/4-4.png",1);
-    frontalArray[16]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-1.png",1);
-    frontalArray[17]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-2.png",1);
-    frontalArray[18]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-3.png",1);
-    frontalArray[19]=imread("C:/Users/nader/Documents/Bitirme/Frontal Lumbar/5-4.png",1);
+    frontalArray[0]=imread("E:/Workspace/Spine/Frontal Lumbar/1-1.png",1);
+    frontalArray[1]=imread("E:/Workspace/Spine/Frontal Lumbar/1-2.png",1);
+    frontalArray[2]=imread("E:/Workspace/Spine/Frontal Lumbar/1-3.png",1);
+    frontalArray[3]=imread("E:/Workspace/Spine/Frontal Lumbar/1-4.png",1);
+    frontalArray[4]=imread("E:/Workspace/Spine/Frontal Lumbar/2-1.png",1);
+    frontalArray[5]=imread("E:/Workspace/Spine/Frontal Lumbar/2-2.png",1);
+    frontalArray[6]=imread("E:/Workspace/Spine/Frontal Lumbar/2-3.png",1);
+    frontalArray[7]=imread("E:/Workspace/Spine/Frontal Lumbar/2-4.png",1);
+    frontalArray[8]=imread("E:/Workspace/Spine/Frontal Lumbar/3-1.png",1);
+    frontalArray[9]=imread("E:/Workspace/Spine/Frontal Lumbar/3-2.png",1);
+    frontalArray[10]=imread("E:/Workspace/Spine/Frontal Lumbar/3-3.png",1);
+    frontalArray[11]=imread("E:/Workspace/Spine/Frontal Lumbar/3-4.png",1);
+    frontalArray[12]=imread("E:/Workspace/Spine/Frontal Lumbar/4-1.png",1);
+    frontalArray[13]=imread("E:/Workspace/Spine/Frontal Lumbar/4-2.png",1);
+    frontalArray[14]=imread("E:/Workspace/Spine/Frontal Lumbar/4-3.png",1);
+    frontalArray[15]=imread("E:/Workspace/Spine/Frontal Lumbar/4-4.png",1);
+    frontalArray[16]=imread("E:/Workspace/Spine/Frontal Lumbar/5-1.png",1);
+    frontalArray[17]=imread("E:/Workspace/Spine/Frontal Lumbar/5-2.png",1);
+    frontalArray[18]=imread("E:/Workspace/Spine/Frontal Lumbar/5-3.png",1);
+    frontalArray[19]=imread("E:/Workspace/Spine/Frontal Lumbar/5-4.png",1);
 
     ui->setupUi(this);
     connect(ui->mainLabel, SIGNAL(sendMousePosition(QPoint&)), this, SLOT(showMousePosition(QPoint&)));
@@ -94,13 +94,13 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_actLateral_triggered()
+void MainWindow::on_actLateral_triggered()          // LATERAL TRIGGERED
 {
     cout << "entered Lateral" << endl;
     isFront = 0;
     vertexCount = 0;
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                    "C:/Users/nader/Documents/Final_Project/Test Phases",
+                                                    "E:/Workspace/Spine/img/",
                                                     tr("Images (*.png *.xpm *.jpg)"));
 
     QByteArray ba = fileName.toLatin1();
@@ -108,7 +108,7 @@ void MainWindow::on_actLateral_triggered()
     displayImage = imread(defaultPath);
     defaultImage = imread(defaultPath);
     updateImage();
-    QPixmap pixPrev("C:/Users/nader/Documents/deneme/Lateral/0.png");
+    QPixmap pixPrev("E:/Workspace/Spine/Lateral/0.png");
     ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) lateralArray[vertexCount].data, lateralArray[vertexCount].cols, lateralArray[vertexCount].rows, QImage::Format_RGB888)));
     ui->sideLabel->setScaledContents(true);
     ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -116,19 +116,20 @@ void MainWindow::on_actLateral_triggered()
 
 }
 
-void MainWindow::on_actlFront_triggered()
+void MainWindow::on_actlFront_triggered()         //FRONTAL TRIGGERED
 {
     isFront = 1;
     vertexCount = 0;
+    //QString = QDir::home();
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                    "C:/Users/nader/Documents/Final_Project/Test Phases",
+                                                    "E:/Workspace/Spine/img/",
                                                     tr("Images (*.png *.xpm *.jpg)"));
     QByteArray ba = fileName.toLatin1();
     defaultPath = ba.data();
     displayImage = imread(defaultPath);
     defaultImage = imread(defaultPath);;
     updateImage();
-    QPixmap pixPrev("C:/Users/nader/Documents/deneme/Front/0.png");
+    QPixmap pixPrev("E:/Workspace/Spine/Front/0.png");
     ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frontalArray[vertexCount].data, frontalArray[vertexCount].cols, frontalArray[vertexCount].rows, QImage::Format_RGB888)));
     ui->sideLabel->setScaledContents(true);
     ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -234,7 +235,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 void MainWindow::createOutput()
 {
 
-    QString filename = "C:/Users/nader/Documents/Final_Project/final.py";
+    QString filename = "E:/Workspace/Spine/final.py";
     QFile file(filename);
     if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
 
@@ -331,7 +332,7 @@ void MainWindow::on_btnReset_clicked()
         displayImage = imread(defaultPath);
 
         updateImage();
-        QPixmap pixPrev("C:/Users/nader/Documents/deneme/Front/0.png");
+        QPixmap pixPrev("E:/Workspace/Spine/Front/0.png");
         ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frontalArray[vertexCount].data, frontalArray[vertexCount].cols, frontalArray[vertexCount].rows, QImage::Format_RGB888)));
         ui->sideLabel->setScaledContents(true);
         ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -342,7 +343,7 @@ void MainWindow::on_btnReset_clicked()
         displayImage = imread(defaultPath);
         defaultImage = displayImage.clone();
         updateImage();
-        QPixmap pixPrev("C:/Users/nader/Documents/deneme/Lateral/0.png");
+        QPixmap pixPrev("E:/Workspace/Spine/Lateral/0.png");
         ui->sideLabel->setPixmap(QPixmap::fromImage(QImage((unsigned char*) lateralArray[vertexCount].data, lateralArray[vertexCount].cols, lateralArray[vertexCount].rows, QImage::Format_RGB888)));
         ui->sideLabel->setScaledContents(true);
         ui->sideLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);

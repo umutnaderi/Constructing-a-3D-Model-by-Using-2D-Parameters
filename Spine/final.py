@@ -311,3 +311,59 @@ Gui.SendMsgToActiveView("ViewFit")
 
 Gui.activeDocument().activeView().viewAxonometric()
 
+
+scale01.Placement.Base = App.Vector(375,347,513)
+scale01.Placement.Rotation = App.Rotation(App.Vector(0,1,0),-2.68378)
+scale01.Placement.Rotation = App.Rotation(App.Vector(1,0,0),10.5816)
+scale01.Scale = (7.11892,13.2249,10.4286)
+scale02.Placement.Base = App.Vector(376,333,440)
+scale02.Placement.Rotation = App.Rotation(App.Vector(0,1,0),0)
+scale02.Placement.Rotation = App.Rotation(App.Vector(1,0,0),10.4692)
+scale02.Scale = (11.1111,13.3654,10.4286)
+scale11.Placement.Base = App.Vector(375,321,411)
+scale11.Placement.Rotation = App.Rotation(App.Vector(0,1,0),-0.511556)
+scale11.Placement.Rotation = App.Rotation(App.Vector(1,0,0),8.1301)
+scale11.Scale = (12.4449,13.132,10.2857)
+scale12.Placement.Base = App.Vector(378,306,339)
+scale12.Placement.Rotation = App.Rotation(App.Vector(0,1,0),0.855097)
+scale12.Placement.Rotation = App.Rotation(App.Vector(1,0,0),9.78241)
+scale12.Scale = (14.8905,12.6119,10.2857)
+scale21.Placement.Base = App.Vector(377,298,313)
+scale21.Placement.Rotation = App.Rotation(App.Vector(0,1,0),0)
+scale21.Placement.Rotation = App.Rotation(App.Vector(1,0,0),3.81407)
+scale21.Scale = (14.8889,13.2249,10.7143)
+scale22.Placement.Base = App.Vector(380,293,238)
+scale22.Placement.Rotation = App.Rotation(App.Vector(0,1,0),-0.41518)
+scale22.Placement.Rotation = App.Rotation(App.Vector(1,0,0),0.636594)
+scale22.Scale = (15.3337,12.8579,10.7143)
+scale31.Placement.Base = App.Vector(381,288,213)
+scale31.Placement.Rotation = App.Rotation(App.Vector(0,1,0),-2.5448)
+scale31.Placement.Rotation = App.Rotation(App.Vector(1,0,0),-6.04409)
+scale31.Scale = (15.0148,12.2107,10.4286)
+scale32.Placement.Base = App.Vector(378,293,140)
+scale32.Placement.Rotation = App.Rotation(App.Vector(0,1,0),-1.66028)
+scale32.Placement.Rotation = App.Rotation(App.Vector(1,0,0),-10.7843)
+scale32.Scale = (15.3398,12.2157,10.4286)
+scale41.Placement.Base = App.Vector(372,293,116)
+scale41.Placement.Rotation = App.Rotation(App.Vector(0,1,0),0)
+scale41.Placement.Rotation = App.Rotation(App.Vector(1,0,0),-21.1813)
+scale41.Scale = (16.6667,12.2566,10.5714)
+scale42.Placement.Base = App.Vector(366,321,42)
+scale42.Placement.Rotation = App.Rotation(App.Vector(0,1,0),-4.26789)
+scale42.Placement.Rotation = App.Rotation(App.Vector(1,0,0),-34.6952)
+scale42.Scale = (14.9303,13.5526,10.5714)
+FreeCAD.ActiveDocument.recompute()
+Gui.SendMsgToActiveView("ViewFit")
+Gui.activeDocument().activeView().viewAxonometric()
+volume01 = loft01.Shape.Volume
+volume02 = loft11.Shape.Volume
+volume03 = loft21.Shape.Volume
+volume04 = loft31.Shape.Volume
+volume05 = loft41.Shape.Volume
+totalvolume = loft01.Shape.Volume + loft11.Shape.Volume + loft21.Shape.Volume + loft31.Shape.Volume + loft41.Shape.Volume
+volume01
+volume02
+volume03
+volume04
+volume05
+totalvolume
